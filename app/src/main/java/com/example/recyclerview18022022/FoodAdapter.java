@@ -29,7 +29,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
-
+        holder.bind(listFood.get(position));
     }
 
     @Override
@@ -43,6 +43,20 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public FoodViewHolder(@NonNull ItemFoodBinding itemFoodBinding) {
             super(itemFoodBinding.getRoot());
             viewBinding = itemFoodBinding;
+        }
+
+        public void bind(FoodModel foodModel){
+            viewBinding.textViewPrice.setText(foodModel.getPrice() + "");
+            if (foodModel.isFavorite()){
+                viewBinding.imageFavorite.setImageResource(R.drawable.icon_heart_full);
+            }else{
+                viewBinding.imageFavorite.setImageResource(R.drawable.icon_heart_empty);
+            }
+            viewBinding.imageFood.setImageResource(foodModel.getImage());
+            viewBinding.textViewRating.setText(foodModel.getRating()+"");
+            viewBinding.textViewTotalRating.setText(foodModel.getTotalUserVotes() + "");
+            viewBinding.textViewName.setText(foodModel.getName());
+            viewBinding.textViewIngredient.setText(foodModel.getMainIngredient());
         }
     }
 }
