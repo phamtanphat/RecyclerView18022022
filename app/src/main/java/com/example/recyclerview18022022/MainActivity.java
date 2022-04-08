@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         mFoodAdapter.setOnItemClickFoodHolder(new FoodAdapter.OnItemClickFoodHolder() {
             @Override
             public void onClickFavorite(int position) {
-                Log.d("BBB",position + "");
+                boolean isFavorite = mListFoods.get(position).isFavorite();
+                mListFoods.get(position).setFavorite(!isFavorite);
+                mFoodAdapter.notifyItemChanged(position);
             }
         });
     }
