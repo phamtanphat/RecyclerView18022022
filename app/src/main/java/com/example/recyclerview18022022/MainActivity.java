@@ -3,6 +3,7 @@ package com.example.recyclerview18022022;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.recyclerview18022022.databinding.ActivityMainBinding;
 
@@ -26,5 +27,12 @@ public class MainActivity extends AppCompatActivity {
         mBinding.recyclerViewFood.setHasFixedSize(true);
         mBinding.recyclerViewFood.setAdapter(mFoodAdapter);
 
+
+        mFoodAdapter.setOnItemClickFoodHolder(new FoodAdapter.OnItemClickFoodHolder() {
+            @Override
+            public void onClickFavorite(int position) {
+                Log.d("BBB",position + "");
+            }
+        });
     }
 }

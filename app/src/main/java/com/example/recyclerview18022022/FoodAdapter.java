@@ -1,7 +1,10 @@
 package com.example.recyclerview18022022;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +16,7 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
     List<FoodModel> listFood;
+    OnItemClickFoodHolder onItemClickFoodHolder;
 
     public FoodAdapter(List<FoodModel> listFood) {
         this.listFood = listFood;
@@ -43,6 +47,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public FoodViewHolder(@NonNull ItemFoodBinding itemFoodBinding) {
             super(itemFoodBinding.getRoot());
             viewBinding = itemFoodBinding;
+            
+            viewBinding.imageFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onItemClickFoodHolder != null){
+                        onItemClickFoodHolder.onClickFavorite(getAdapterPosition());
+                    }
+                }
+            });
         }
 
         public void bind(FoodModel foodModel){
@@ -58,5 +71,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             viewBinding.textViewName.setText(foodModel.getName());
             viewBinding.textViewIngredient.setText(foodModel.getMainIngredient());
         }
+    }
+    public void setOnItemClickFoodHolder(OnItemClickFoodHolder onItemClickFoodHolder){
+        this.onItemClickFoodHolder = onItemClickFoodHolder;
+    }
+
+    interface OnItemClickFoodHolder{
+        void onClickFavorite(int position);
     }
 }
