@@ -54,7 +54,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             }
             viewBinding.imageFood.setImageResource(foodModel.getImage());
             viewBinding.textViewRating.setText(foodModel.getRating()+"");
-            viewBinding.textViewTotalRating.setText(foodModel.getTotalUserVotes() + "");
+            viewBinding.textViewTotalRating.setText(String.format("(+ %d)",foodModel.getTotalUserVotes()));
             viewBinding.textViewName.setText(foodModel.getName());
             viewBinding.textViewIngredient.setText(foodModel.getMainIngredient());
         }
